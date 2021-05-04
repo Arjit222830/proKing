@@ -1,7 +1,7 @@
 {
   "name": "login-react-hooks-context",
   "version": "0.1.0",
-  "homepage": "http://jorgemgr94.github.io/login-react-hooks-context/",
+  "homepage": ".",
   "private": true,
   "proxy": "http://localhost:8000/",
   "dependencies": {

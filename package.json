@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "heroku-postbuild": "npm install --prefix ./Client && npm run build --prefix ./Client",
-    "start": "node server/app.js",
+    "start": "node ./server/app.js",
     "client": "npm start --prefix ./Client",
-    "server": "nodemon server/app.js",
+    "server": "nodemon ./server/app.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "engines": {

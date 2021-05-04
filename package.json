@@ -2,11 +2,12 @@
   "name": "react-backend",
   "version": "0.0.0",
   "private": true,
+  "main": "Server/app.js",
   "scripts": {
     "heroku-postbuild": "npm install --prefix ./Client && npm run build --prefix ./Client",
-    "start": "node ./server/app.js",
+    "start": "node ./Server/app.js",
     "client": "npm start --prefix ./Client",
-    "server": "nodemon ./server/app.js",
+    "server": "nodemon ./Server/app.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "engines": {

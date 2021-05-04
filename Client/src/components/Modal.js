@@ -26,6 +26,7 @@ const ModalUI = (props)=>{
 
   const body = (
 
+    
     <div style={{padding:'1vw',backgroundColor:'white',position: 'absolute',border: '2px solid #000',width: state.mobileView?'76vw':'50vw',marginTop:'30vh',marginLeft:state.mobileView?'12vw':'23vw'}}>
         <h2 id="simple-modal-title">Submit</h2>
         <hr />

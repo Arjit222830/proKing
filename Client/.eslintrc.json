@@ -1,0 +1,11 @@
+{
+    "extends": "react-app",
+    "rules": {        
+        "semi": [2, "always"],
+        "jsx-quotes": ["error", "prefer-double"],
+        "indent": ["error", "tab"],
+        "no-tabs": 0,
+        "react/no-deprecated": ["error"],
+        "quotes": [2, "single", "avoid-escape"]
+    }
+}

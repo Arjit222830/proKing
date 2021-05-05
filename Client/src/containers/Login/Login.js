@@ -22,6 +22,7 @@ function Login() {
 
 	const handleSubmit = async(e) => {
 		e.preventDefault();
+		console.log('nhej');
 		const response= await axios.post('/user',{name:values.name,email:values.email,password:values.password});
 		console.log(response.data);
 		const user = {

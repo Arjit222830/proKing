@@ -26,7 +26,7 @@ router.post('/',async (req,res)=>{
     }
 
     const token = jwt.sign({email:req.body.email,name:req.body.name}, config.get('jwtPrivateKey'));
-    
+    console.log(token);
     res.send(token);
 });
 

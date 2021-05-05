@@ -44,7 +44,7 @@ else{
 
 
 
-const port=process.env.PORT || 8080 ;
+const port=process.env.PORT || 8000 ;
 console.log(port);
 const server = app.listen(port, ()=> console.log(`Listening on port ${port}...`));
 var env = process.env.NODE_ENV || 'development';

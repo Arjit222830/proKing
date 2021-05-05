@@ -19,11 +19,18 @@ const App= ()=> {
 			dispatch(mobileView(true));
 		
 		const data= async()=>{
-			dispatch(await fetchLands());
+			var token=null;
+
+			if(state.session){
+				token= state.session.token;
+				console.log(token);
+			}
+
+			dispatch(await fetchLands(token));
 		}
 		data();
 		
-	},[screenWidth]);
+	},[screenWidth,state.session]);
 
 	console.log(state);
 

@@ -1,18 +1,25 @@
 const express= require('express');
 const router= express.Router();
-const {Land}= require('../models/land');
+const {Land}= require('../models/land'); 
+const auth = require('../middlewares/auth');
 
-router.get('/',async (req,res)=>{
+router.get('/',auth,async (req,res)=>{
     const lands=await Land.find();
     res.send(lands);
 });
 
-router.get('/:id',async (req,res)=>{
+router.get('/:id',auth,async (req,res)=>{
     const land=await Land.find({_id: req.params.id});
     res.send(land[0]);
 });
 
-router.post('/',async (req,res)=>{
+router.post('/',auth,async (req,res)=>{
+    const notUnique=await Land.findOne({name: req.body.name});
+
+    console.log(notUnique);
+
+    if(notUnique)
+        return res.send({error:'Land Already Existed'});
     
     const land= new Land(req.body);
 
@@ -22,7 +29,12 @@ router.post('/',async (req,res)=>{
 });
 
 //Update
-router.put('/:id',async (req,res)=>{
+router.put('/:id',auth,async (req,res)=>{
+
+    const notUnique=await Land.findOne({name: req.body.name});
+
+    if(notUnique)
+        return res.send({error:'Land Already Existed'});
     
     let land = await Land.findByIdAndUpdate(req.params.id, req.body,  {new: true});
   
@@ -31,9 +43,7 @@ router.put('/:id',async (req,res)=>{
     res.send(land);
 });
 
-
-
-router.delete('/:id', async (req,res)=>{
+router.delete('/:id', auth, async (req,res)=>{
     
     const remove=await Land.deleteOne({_id:req.params.id});
     if(!remove)

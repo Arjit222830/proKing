@@ -6,42 +6,62 @@ export const mobileView= (flag)=>{
     }
 }
 
-export const fetchLands = async () => {
-    const response = await axios.get('/land');
+export const setSession= (user)=>{
+    localStorage.setItem('session', JSON.stringify(user));
+    return {
+        type: 'SET_SESSION',
+        payload: user
+    }
+}
+
+export const fetchLands = async (token) => {
+    const response = await axios.get('/land',{
+            headers:{
+                'x-auth-token': token
+            }
+        }
+    );
     return {
         type: 'fetchLand', 
         payload: response.data
     }
 };
 
-export const fetchLand = async (id) => {
-    const response = await axios.get(`/land/${id}`);
+export const fetchLand = async (id,token) => {
+    const response = await axios.get(`/land/${id}`,{
+            headers:{
+                'x-auth-token': token
+            }
+        }
+    );
+
     return { 
         type: 'fetchLand', 
         payload: response.data
     }
 };
 
-export const addLand= async(formValues)=>{
-    const response= await axios.post(`/land`, formValues);
-    console.log(response);
+export const addLand= (data)=>{
     return {
         type: 'addLand',
-        payload: response.data
+        payload: data
     }
 };
 
-export const editLand = async(id,formValues) =>{
-    const response=  await axios.put(`/land/${id}`, formValues);
-    console.log(response.data);
+export const editLand = (data) =>{
     return { 
         type: 'editLand', 
-        payload: response.data
+        payload: data
     }
 };
 
-export const deleteLand = async (id)=> {
-    await axios.delete(`/land/${id}`);
+export const deleteLand = async (id,token)=> {
+    await axios.delete(`/land/${id}`,{
+        headers:{
+            'x-auth-token': token
+        }
+    });
+
     return {
         type: 'deleteLand',
         payload: id

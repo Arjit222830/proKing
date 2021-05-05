@@ -20,9 +20,10 @@ const globalReducer = (state = initialState, action) => {
 	case "fetchLand":
 		return { ...state, lands: _.mapKeys(action.payload,'_id')};
 	case "addLand":
-		return {...state, lands:{...state.lands,[action.payload._id]: action.payload }};
+		return {...state, lands:{...state.lands,[action.payload._id]: action.payload}};
 	case "editLand":
-		return { ...state, lands: {...state.lands,[action.payload._id]: action.payload}};
+		console.log(action.payload);
+		return {...state, lands:{...state.lands,[action.payload._id]: action.payload}};
 	case "deleteLand":
 		return {...state, lands: _.omit(state.lands, action.payload)};
 	default:

@@ -33,7 +33,11 @@ const Edit = () => {
     useEffect(()=>{
 
         const laoding= async()=>{
-            const response= await axios.get(`/land/${params.id}`);
+            const response= await axios.get(`/land/${params.id}`,{
+                headers:{
+                    'x-auth-token': state.session.token
+                }
+            });
             console.log(response.data);
             const val= response.data;
             setValues({
@@ -49,7 +53,21 @@ const Edit = () => {
 	const handleSubmit = (formValues)=> async(e) => {
 		e.preventDefault();
         console.log(formValues);
-        dispatch(await editLand(id,formValues));
+        const response=  await axios.put(`/land/${id}`, formValues,{
+            headers:{
+                'x-auth-token': state.session.token
+            }
+        }); 
+
+        if(response){
+			if(response.data.error){
+				alert(response.data.error);
+				return;
+            }
+
+			dispatch(editLand(response.data));
+		}
+
         history.push('/');
 	};
 

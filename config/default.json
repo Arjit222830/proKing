@@ -1,3 +1,4 @@
 {
-    "db": "mongodb://localhost/proking"
+    "db": "mongodb://localhost/proking",
+    "jwtPrivateKey": "Arjit"
 }

@@ -11,7 +11,7 @@ import Form from '../../components/Form';
 
 import { addLand } from '../../actions/actions';
 
-
+import axios from '../../axios';
 
 const Add = () => {
 
@@ -29,8 +29,21 @@ const Add = () => {
 
 	const handleSubmit = (formValues)=> async(e) => {
 		e.preventDefault();
-        console.log(formValues);
-        dispatch(await addLand(formValues));
+		const response= await axios.post(`/land`, formValues,{
+			headers:{
+				'x-auth-token': state.session.token
+			}
+		});
+
+		if(response){
+			if(response.data.error){
+				alert(response.data.error);
+				return;
+			}
+
+			dispatch(addLand(response.data));
+		}
+
         history.push('/');
 	};
 

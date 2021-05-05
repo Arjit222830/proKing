@@ -1,3 +1,4 @@
 {
-    "db":"proking_db"
+    "db":"proking_db",
+    "jwtPrivateKey": "jwtPrivateKey"
 }

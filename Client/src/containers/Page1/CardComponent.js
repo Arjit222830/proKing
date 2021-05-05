@@ -3,9 +3,10 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
 import Grid from '@material-ui/core/Grid';
-import {Link} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import {useHistory} from 'react-router-dom';
 
 import Modal from '../../components/Modal';
 
@@ -13,33 +14,42 @@ import {deleteLand} from '../../actions/actions'
 
 function CardComponent(props) {
 	const land = props.data;
+
+	const history= useHistory();
 	return (
 		<Card>
 			<CardActionArea>
-				<CardMedia
-					component="img"
-					alt="alt text"
-					image="https://source.unsplash.com/random"
-					title="title text"
-					style={{height:'35vh'}}
-				/>
 				<CardContent style={{textAlign:'center'}}>
+					<Typography variant="h5" gutterBottom>
+						Land Name: {land.name}
+					</Typography><br/>
 					<Typography gutterBottom>
-						{land.name}
+						Area: {land.area}
 					</Typography>
+					<Typography gutterBottom>
+						City: {land.city}
+					</Typography>
+					<Typography gutterBottom>
+						State: {land.state}
+					</Typography>
+					<Typography gutterBottom>
+						Country: {land.country}
+					</Typography>
+				</CardContent>
+				<CardActions style={{marginLeft:'5vw'}}>
 					<Grid container>
 						<Grid item xs={6}>
-							<Link to={`/admin/edit/${land._id}`} style={{textDecoration:'none'}} >
+							<Button size="small" color="primary" onClick={()=> history.push(`/admin/edit/${land._id}`)}>
 								Edit
-							</Link>
+							</Button>
 						</Grid>
 						<Grid item xs={6}>
-							<div onClick={(e)=> document.getElementById(`land${land._id}`).click()} style={{cursor:'pointer'}}>
+							<Button size="small" color="primary" onClick={(e)=> document.getElementById(`land${land._id}`).click()} style={{cursor:'pointer'}}>
 								Delete
-							</div>
+							</Button>
 						</Grid>	
 					</Grid>
-				</CardContent>
+     			 </CardActions>
 			</CardActionArea>
 			<Modal id={land._id} action={deleteLand}/>
 		</Card>

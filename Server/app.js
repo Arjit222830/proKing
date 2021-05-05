@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //app.use('/payment' , payments);
 
 app.use('/land',landRoutes);
-app.use('/order',userRoutes);
+app.use('/user',userRoutes);
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../Client/build')));
@@ -44,7 +44,7 @@ else{
 
 
 
-const port=process.env.PORT || 8000 ;
+const port=process.env.PORT || 8080 ;
 console.log(port);
 const server = app.listen(port, ()=> console.log(`Listening on port ${port}...`));
 var env = process.env.NODE_ENV || 'development';

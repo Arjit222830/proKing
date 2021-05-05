@@ -7,6 +7,10 @@ import logo from '../../assets/img/logo.png';
 import { Store } from '../../Store';
 import './Login.scss';
 
+import axios from '../../axios';
+
+import {setSession} from '../../actions/actions';
+
 function Login() {
 	const { state,dispatch } = useContext(Store);
 
@@ -16,18 +20,16 @@ function Login() {
 		passsword:''
 	});
 
-	const handleSubmit = () => {
+	const handleSubmit = async(e) => {
+		e.preventDefault();
+		const response= await axios.post('/user',{name:values.name,email:values.email,password:values.password});
+		console.log(response.data);
 		const user = {
 			name: values.name,
 			email: values.email,
-			token: Math.random().toString(36).substring(7)
+			token: response.data
 		};
-
-		localStorage.setItem('session', JSON.stringify(user));
-		dispatch({
-			type: 'SET_SESSION',
-			payload: user
-		});
+		dispatch(setSession(user));
 	};
 
 	const handleChange = (prop) => (event) => {
@@ -40,7 +42,7 @@ function Login() {
 		<Grid container className="LoginContainer">
 			<Grid item xs={state.mobileView?4:8} className="LeftSide"></Grid>
 			<Grid item xs={state.mobileView?8:4} className="RightSide">
-				<form onSubmit={() => handleSubmit()}>
+				<form onSubmit={handleSubmit}>
 					<img alt="logo" src={logo} />
 					<br />
 					<br />

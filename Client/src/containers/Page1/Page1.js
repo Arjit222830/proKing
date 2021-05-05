@@ -23,7 +23,7 @@ function Page1() {
 		<Grid container spacing={24} justify-content={state.mobileView?'center':'start'}>
 			{
 				Object.values(state.lands).map((land,key) =>
-					<Grid key={key} item xs={state.mobileView?10:4}>
+					<Grid key={key} item xs={state.mobileView?6:3}>
 						<Suspense fallback={loading}>
 							<CardComponent data={land} />
 						</Suspense>

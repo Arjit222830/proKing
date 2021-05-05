@@ -31,7 +31,7 @@ router.post('/',auth,async (req,res)=>{
 //Update
 router.put('/:id',auth,async (req,res)=>{
 
-    const notUnique=await Land.findOne({name: req.body.name});
+    const notUnique=await Land.findOne({ _id:{"$ne": req.params.id }, name: req.body.name});
 
     if(notUnique)
         return res.send({error:'Land Already Existed'});
